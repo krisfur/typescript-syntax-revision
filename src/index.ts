@@ -5,10 +5,13 @@ console.log('============')
 console.log('VARIABLES')
 console.log('============')
 // Variables
+// const values can be modified, but cannot be reassigned
 const namedString: string = 'This is a const string';
+// could not now do namedString= something else
 // types allowed: string, number, boolean, any, void, null, undefined, never
 
 console.log(`Formatted string with variable: ${namedString}`);
+// let values can be reassigned, so you could do another count = something else and it would be valid
 let count: number = 0;
 console.log(`Your count of type ${typeof count} is ${count}`);
 count += 1;
@@ -38,7 +41,7 @@ function optional(a: number, b?: number): number {
 }
 
 // you can use "|" for multiple types (union)
-export function getId(id: string | number): number {
+export function getId(id: string | number): number { // "export" allows a function to be callable by other files importing this one
     if (typeof id === "string") { //this handles the string case
         return parseInt(id);
     }
