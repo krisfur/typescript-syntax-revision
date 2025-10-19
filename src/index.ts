@@ -318,3 +318,87 @@ const user1: User = {
 };
 
 console.log(`User: ${user1.name}, Email: ${user1.email}`);
+
+console.log("\n");
+console.log('============');
+console.log('GENERICS, CASTING, NULL, ASYNC, SPREAD');
+console.log('============');
+
+// Generics - reusable function for many types, without specifying unions
+function identity<T>(arg: T): T { return arg; } // think C++ templates
+
+console.log(identity(2));
+console.log(identity("cat"));
+
+// Casting - tell TypeScript you know the expected type so it does not need to check
+let someValue: any = "hello";
+let strLength: number = (someValue as string).length;
+console.log(strLength);
+
+// Async
+async function fetchData(): Promise<string> {
+    return "data";
+}
+
+console.log(`Data received: ${fetchData()}`);
+
+// Spread operator - merge arrays and objects
+let arr1 = [1,2,3]
+let arr2 = [...arr1,4,5]
+console.log(arr2)
+
+// Null handling
+
+// null and undefined are different types in TypeScript
+let notAssigned: undefined = undefined;
+let empty: null = null;
+
+console.log(`undefined: ${notAssigned}, null: ${empty}`);
+
+// Optional chaining (?.) - safely access nested properties
+type Address = {
+    street: string;
+    city: string;
+};
+
+type Customer = {
+    name: string;
+    address?: Address; // address is optional
+};
+
+const customer1: Customer = { name: "John" };
+const customer2: Customer = {
+    name: "Jane",
+    address: { street: "123 Main St", city: "Boston" }
+};
+
+// Without optional chaining (would cause error if the address is undefined)
+// console.log(customer1.address.city); // ERROR!
+
+// With optional chaining - returns undefined if the address doesn't exist
+console.log(`Customer 1 city: ${customer1.address?.city}`); // undefined
+console.log(`Customer 2 city: ${customer2.address?.city}`); // Boston
+
+// Nullish coalescing (??) - provides a default value for null/undefined
+const city1 = customer1.address?.city ?? "Unknown City";
+const city2 = customer2.address?.city ?? "Unknown City";
+
+console.log(`Customer 1 lives in: ${city1}`); // Unknown City
+console.log(`Customer 2 lives in: ${city2}`); // Boston
+
+// Difference between ?? and ||
+// || treats 0, "", false as falsy and uses default
+// ?? only treats null/undefined as nullish
+
+let count1 = 0;
+let count2: number | null = null;
+
+console.log(`Using ||: ${count1 || 100}`); // 100 (wrong! 0 is valid)
+console.log(`Using ??: ${count1 ?? 100}`); // 0 (correct!)
+console.log(`Using ?? with null: ${count2 ?? 100}`); // 100 (correct!)
+
+// Non-null assertion operator (!) - tells TypeScript "trust me, this isn't null"
+// Use with caution - you're disabling type safety!
+let maybeString: string | undefined = "Hello";
+console.log(maybeString!.toUpperCase()); // HELLO
+// If maybeString was actually undefined, this would crash at runtime!
