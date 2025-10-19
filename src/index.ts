@@ -1,9 +1,9 @@
 console.log('TypeScript Syntax Revision Notes')
 
 //console.log("\n");
-console.log('============')
-console.log('VARIABLES')
-console.log('============')
+console.log('============');
+console.log('VARIABLES');
+console.log('============');
 // Variables
 // const values can be modified but cannot be reassigned
 const namedString: string = 'This is a const string';
@@ -18,9 +18,9 @@ count += 1;
 console.log(`Your updated count of type ${typeof count} is ${count}`);
 
 console.log("\n");
-console.log('============')
-console.log('FUNCTIONS, UNIONS, CONDITIONALS, OPTIONALS')
-console.log('============')
+console.log('============');
+console.log('FUNCTIONS, UNIONS, CONDITIONALS, OPTIONALS');
+console.log('============');
 
 // you define with types, you can skip the return type to have it inferred instead
 function addition(a: number, b: number): number {
@@ -31,7 +31,7 @@ console.log(addition(9,10));
 // you can also use the arrow function syntax, as functions are the same as variables
 const additionArrow = (a: number, b: number): number => a + b;
 // the type of the function is (a: number, b: number) => number
-console.log(additionArrow(2,2))
+console.log(additionArrow(2,2));
 
 // optionals are denoted with "?"
 function optional(a: number, b?: number): number {
@@ -52,7 +52,7 @@ export function getId(id: string | number): number { // "export" allows a functi
     return id;
 }
 
-console.log(`The ID is ${getId(123)} and has type ${typeof getId(123)}.`)
+console.log(`The ID is ${getId(123)} and has type ${typeof getId(123)}.`);
 
 // you can also do conditionals in line
 export function calculateApiCost(numReqs: number, membership?: string) {
@@ -62,9 +62,9 @@ export function calculateApiCost(numReqs: number, membership?: string) {
     return numReqs * (membership === "pro" ? 0.03 : 0.05); //if "pro" use first value, otherwise second value
 }
 
-console.log(`The API cost for 100 requests for non-members is ${calculateApiCost(100)}`)
-console.log(`The API cost for 100 requests for members is ${calculateApiCost(100,"member")}`)
-console.log(`The API cost for 100 requests for pro members is ${calculateApiCost(100,"pro")}`)
+console.log(`The API cost for 100 requests for non-members is ${calculateApiCost(100)}`);
+console.log(`The API cost for 100 requests for members is ${calculateApiCost(100,"member")}`);
+console.log(`The API cost for 100 requests for pro members is ${calculateApiCost(100,"pro")}`);
 
 //default parameters behave as expected
 export function calculateApiCostDefault(numReqs: number, membership: string = "free") {
@@ -101,11 +101,11 @@ console.log('============');
 
 // An array that can only hold numbers
 let numbers: number[] = [10, 20, 30];
-console.log(numbers[0]) //print element 0
+console.log(numbers[0]); //print element 0
 
 // An array that can only hold strings
 let fruits: string[] = ["apple", "banana", "cherry"];
-console.log(fruits.slice(1)) //print from index 1 onward
+console.log(fruits.slice(1)); //print from index 1 onward
 
 // array methods:
 /*
@@ -200,9 +200,9 @@ for (let i = 0; i < fruitList.length; i++) {
 }
 
 console.log("\n");
-console.log('============')
-console.log('ENUMS, CLASSES, INTERSECTIONS, INTERFACES')
-console.log('============')
+console.log('============');
+console.log('ENUMS, CLASSES, INTERSECTIONS, INTERFACES');
+console.log('============');
 
 // @ts-ignore unused enum values
 enum Mode {
@@ -402,3 +402,20 @@ console.log(`Using ?? with null: ${count2 ?? 100}`); // 100 (correct!)
 let maybeString: string | undefined = "Hello";
 console.log(maybeString!.toUpperCase()); // HELLO
 // If maybeString was actually undefined, this would crash at runtime!
+
+console.log("\n");
+console.log('============');
+console.log('IMPORTS/EXPORTS');
+console.log('============');
+
+// You can import any functions or classes that have the export keyword
+import { importedAddition } from './functions';
+
+// You can also import multiple things at once:
+// import { function1, function2, MyClass } from './functions';
+
+// Or import everything as a namespace:
+// import * as Functions from './functions';
+// call it as Functions.importedAddition(5,7);
+
+console.log(`Imported addition: 5 + 7 = ${importedAddition(5, 7)}`);
