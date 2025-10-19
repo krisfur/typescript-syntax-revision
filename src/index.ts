@@ -35,7 +35,7 @@ console.log(additionArrow(2,2))
 
 // optionals are denoted with "?"
 function optional(a: number, b?: number): number {
-    if (b) {
+    if (b) { // if else example
         return a + b;
     } else {
         return a;
@@ -204,4 +204,117 @@ console.log('============')
 console.log('ENUMS, CLASSES, INTERSECTIONS, INTERFACES')
 console.log('============')
 
-console.log("[TO DO]")
+// @ts-ignore unused enum values
+enum Mode {
+    online,
+    offline
+}
+
+let gameMode: Mode = Mode.offline;
+console.log(`Game mode is: ${gameMode}`); // Outputs: 1
+console.log(`Game mode name: ${Mode[gameMode]}`); // Outputs: offline
+
+// Enum with custom numeric values
+// @ts-ignore unused enum values
+enum HttpStatus {
+    OK = 200,
+    Created = 201,
+    BadRequest = 400,
+    Unauthorized = 401,
+    NotFound = 404,
+    InternalServerError = 500
+}
+
+function handleResponse(status: HttpStatus) {
+    switch (status) { // switch statement example
+        case HttpStatus.OK:
+            console.log("Request successful!");
+            break;
+        case HttpStatus.NotFound:
+            console.log("Resource not found.");
+            break;
+        case HttpStatus.InternalServerError:
+            console.log("Server error occurred.");
+            break;
+        default:
+            console.log(`Status code: ${status}`);
+    }
+}
+
+handleResponse(HttpStatus.OK);
+handleResponse(HttpStatus.NotFound);
+handleResponse(401);
+
+// Const enum - more performant, inlined at compile time
+// @ts-ignore unused enum values
+const enum Color {
+    Red = "#FF0000",
+    Green = "#00FF00",
+    Blue = "#0000FF"
+}
+
+let backgroundColor = Color.Blue;
+console.log(`Background color: ${backgroundColor}`);
+// you can also mix value types, but not recommended practice
+
+// Using enums in functions with reverse mapping (numeric enums only)
+function getStatusName(code: number): string | undefined {
+    return HttpStatus[code];
+}
+
+console.log(`Status 200 is: ${getStatusName(200)}`); // Outputs: OK
+console.log(`Status 404 is: ${getStatusName(404)}`); // Outputs: NotFound
+
+
+// Class - a blueprint for creating objects with properties AND methods
+class Person {
+    name: string;
+    age: number;
+
+    constructor(name: string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+
+    greet(): string {
+        return `Hello, I'm ${this.name} and I'm ${this.age} years old.`;
+    }
+}
+
+const person1 = new Person("Alice", 30); // syntax resembling C++ before C++11
+console.log(person1.greet());
+
+
+// Interface - defines the structure/shape of an object WITHOUT methods
+interface Product { // resembles C style structs
+    id: number;
+    name: string;
+    price: number;
+}
+
+const laptop: Product = {
+    id: 1,
+    name: "MacBook Pro",
+    price: 1999
+};
+
+console.log(`Product: ${laptop.name}, Price: $${laptop.price}`);
+
+
+// Intersection - combines multiple types into one (must have ALL properties)
+type HasName = {
+    name: string;
+};
+
+type HasEmail = {
+    email: string;
+};
+
+type User = HasName & HasEmail; // Intersection: must have both name AND email
+
+const user1: User = {
+    name: "Bob",
+    email: "bob@example.com"
+};
+
+console.log(`User: ${user1.name}, Email: ${user1.email}`);
