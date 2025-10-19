@@ -5,7 +5,7 @@ console.log('============')
 console.log('VARIABLES')
 console.log('============')
 // Variables
-// const values can be modified, but cannot be reassigned
+// const values can be modified but cannot be reassigned
 const namedString: string = 'This is a const string';
 // could not now do namedString= something else
 // types allowed: string, number, boolean, any, void, null, undefined, never
@@ -26,10 +26,12 @@ console.log('============')
 function addition(a: number, b: number): number {
     return a + b;
 }
+console.log(addition(9,10));
 
 // you can also use the arrow function syntax, as functions are the same as variables
 const additionArrow = (a: number, b: number): number => a + b;
 // the type of the function is (a: number, b: number) => number
+console.log(additionArrow(2,2))
 
 // optionals are denoted with "?"
 function optional(a: number, b?: number): number {
@@ -39,6 +41,8 @@ function optional(a: number, b?: number): number {
         return a;
     }
 }
+
+console.log(optional(25));
 
 // you can use "|" for multiple types (union)
 export function getId(id: string | number): number { // "export" allows a function to be callable by other files importing this one
@@ -53,9 +57,9 @@ console.log(`The ID is ${getId(123)} and has type ${typeof getId(123)}.`)
 // you can also do conditionals in line
 export function calculateApiCost(numReqs: number, membership?: string) {
     if (!membership){
-        return numReqs*0.10
+        return numReqs*0.10;
     }
-    return numReqs * (membership === "pro" ? 0.03 : 0.05) //if "pro" use first value, otherwise second value
+    return numReqs * (membership === "pro" ? 0.03 : 0.05); //if "pro" use first value, otherwise second value
 }
 
 console.log(`The API cost for 100 requests for non-members is ${calculateApiCost(100)}`)
@@ -64,28 +68,36 @@ console.log(`The API cost for 100 requests for pro members is ${calculateApiCost
 
 //default parameters behave as expected
 export function calculateApiCostDefault(numReqs: number, membership: string = "free") {
-    return numReqs * (membership === "pro" ? 0.03 : 0.05)
+    return numReqs * (membership === "pro" ? 0.03 : 0.05);
 }
+console.log(`The default API cost for 100 requests is ${calculateApiCostDefault(100)}`);
 
 // you can also use literal types instead of enums
-export function move(directon: "up" | "down" | "left" | "right") {
+export function move(direction: "up" | "down" | "left" | "right") {
     // some logic
+    console.log(`Moving ${direction}`);
 }
+move("up");
 
 // or define your own type for reuse
 type Direction = "north" | "south" | "east" | "west";
 function moveTyped(direction: Direction) {
     // logic
+    console.log(`Moving ${direction}`);
 }
+let characterMove: Direction = "north";
+moveTyped(characterMove);
 
 // and you can reuse union types in other types
 type WalkingDirection = `walk ${Direction}`; //auto expands to "walk north" | "walk south" | "walk east" | "walk west"
 // though you can hit a limit of permutations where TypeScript shouts at you
+let upWalk: WalkingDirection = "walk north";
+console.log(upWalk);
 
 console.log("\n");
-console.log('============')
-console.log('ARRAYS, TUPLES, LOOPS')
-console.log('============')
+console.log('============');
+console.log('ARRAYS, TUPLES, LOOPS');
+console.log('============');
 
 // An array that can only hold numbers
 let numbers: number[] = [10, 20, 30];
@@ -190,13 +202,6 @@ for (let i = 0; i < fruitList.length; i++) {
 console.log("\n");
 console.log('============')
 console.log('ENUMS, CLASSES, INTERSECTIONS, INTERFACES')
-console.log('============')
-
-console.log("[TO DO]")
-
-console.log("\n");
-console.log('============')
-console.log('BASIC REACT STUFF')
 console.log('============')
 
 console.log("[TO DO]")
