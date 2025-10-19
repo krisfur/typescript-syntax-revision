@@ -284,6 +284,30 @@ class Person {
 const person1 = new Person("Alice", 30); // syntax resembling C++ before C++11
 console.log(person1.greet());
 
+// TypeScript also has inheritance, as annoying as the existence of it is
+
+class Warrior extends Person {
+    weapon: string;
+
+    constructor(name: string, age: number, weapon: string) {
+        super(name,age);
+        this.weapon = weapon;
+    }
+
+    // Override parent method
+    greet(): string {
+        return `Hello, I'm ${this.name}, I'm ${this.age} years old, and I wield a ${this.weapon}.`;
+    }
+
+    // Add a new method specific to Warrior
+    attack(): string {
+        return `${this.name} attacks with their ${this.weapon}!`;
+    }
+}
+
+const warrior1 = new Warrior("Thor", 1500, "hammer");
+console.log(warrior1.greet()); // Uses overridden method
+console.log(warrior1.attack()); // Uses Warrior-specific method
 
 // Interface - defines the structure/shape of an object WITHOUT methods
 interface Product { // resembles C style structs
@@ -300,6 +324,26 @@ const laptop: Product = {
 
 console.log(`Product: ${laptop.name}, Price: $${laptop.price}`);
 
+// Classes can also inherit (implement) interfaces
+interface Drivable {
+    speed: number;
+    drive(): void;
+}
+
+class Car implements Drivable {
+    speed: number;
+
+    constructor(speed: number) {
+        this.speed = speed;
+    }
+
+    drive(): void {
+        console.log(`Driving at ${this.speed} km/h`);
+    }
+}
+
+const myCar = new Car(120);
+myCar.drive();
 
 // Intersection - combines multiple types into one (must have ALL properties)
 type HasName = {
