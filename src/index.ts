@@ -510,3 +510,12 @@ import { importedAddition } from './functions';
 // call it as Functions.importedAddition(5,7);
 
 console.log(`Imported addition: 5 + 7 = ${importedAddition(5, 7)}`);
+
+// default functions
+
+// you can also have default imports, meant for when only one thing is meant to be imported from a file
+// export default function.....
+
+// you import them with giving them your own name for it
+// import iNamedThisCarl from './functions';
+// this will import the default function from functions.ts and name it iNamedThisCarl to use that as the function name in your code
