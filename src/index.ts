@@ -96,7 +96,7 @@ console.log(upWalk);
 
 console.log("\n");
 console.log('============');
-console.log('ARRAYS, TUPLES, LOOPS');
+console.log('ARRAYS, TUPLES, LOOPS, HASHMAPS');
 console.log('============');
 
 // An array that can only hold numbers
@@ -198,6 +198,53 @@ for (let i = 0; i < fruitList.length; i++) {
         break; // we can stop the loop
     }
 }
+
+// hashmaps
+// you can do hashmaps the JS way, or the TS way with a map class
+
+// JS way - keys must be strings, numbers, or symbols
+// Define the type using 'Record'
+const studentGrades: Record<string, number> = {}; // <keys type, values type>
+// add items
+studentGrades["Alice"] = 95;
+studentGrades.Bob = 82; // dot notation works iff the key is a valid identifier
+console.log(studentGrades["Alice"]); // Output: 95
+console.log(studentGrades["Charlie"]); // Output: undefined!
+// check existence
+if ("Bob" in studentGrades) {
+  console.log("Bob has a grade.");
+}
+// remove items
+delete studentGrades["Bob"];
+// iterating
+for (const key in studentGrades) {
+  console.log(`${key}: ${studentGrades[key]}`); //pretty obvious syntax
+}
+
+// TS way - keys can be any type, faster at adding and removing, preserves insert order
+// Map<KeyType, ValueType>
+const inventory = new Map<string, number>();
+// add items
+inventory.set("Apple", 50);
+inventory.set("Banana", 100);
+// chaining is possible!
+inventory.set("Orange", 20).set("Mango", 5);
+// retrieve items
+console.log(inventory.get("Apple")); // Output: 50
+console.log(inventory.get("Grapes")); // Output: undefined
+// check existence
+if (inventory.has("Banana")) {
+    console.log("We have bananas!");
+}
+// delete items
+inventory.delete("Apple");
+// get size
+console.log(inventory.size); // Output: 3
+// iterating
+for (const [fruit, count] of inventory) {
+  console.log(`${fruit}: ${count}`);
+}
+
 
 console.log("\n");
 console.log('============');
