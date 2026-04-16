@@ -8,17 +8,17 @@ The repo was generated using WebStorm (JetBrains IDE) with their TS preset.
 
 To get this running, first use NPM to install the dependencies:
 ```bash
-npm install
+bun install
 ```
 
 Building the TypeScript into JavaScript is done with:
 ```bash
-npm run build
+bun run build
 ```
 
 To run it locally we use `ts-node` as aliased in the `package.json` file:
 ```bash
-npm run start
+bun run start
 ```
 
 or directly:

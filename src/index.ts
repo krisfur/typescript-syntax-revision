@@ -1,12 +1,12 @@
-console.log('TypeScript Syntax Revision Notes')
+console.log("TypeScript Syntax Revision Notes");
 
 //console.log("\n");
-console.log('============');
-console.log('VARIABLES');
-console.log('============');
+console.log("============");
+console.log("VARIABLES");
+console.log("============");
 // Variables
 // const values can be modified but cannot be reassigned
-const namedString: string = 'This is a const string';
+const namedString: string = "This is a const string";
 // could not now do namedString= something else
 // types allowed: string, number, boolean, any, void, null, undefined, never
 
@@ -18,72 +18,86 @@ count += 1;
 console.log(`Your updated count of type ${typeof count} is ${count}`);
 
 console.log("\n");
-console.log('============');
-console.log('FUNCTIONS, UNIONS, CONDITIONALS, OPTIONALS');
-console.log('============');
+console.log("============");
+console.log("FUNCTIONS, UNIONS, CONDITIONALS, OPTIONALS");
+console.log("============");
 
 // you define with types, you can skip the return type to have it inferred instead
 function addition(a: number, b: number): number {
-    return a + b;
+  return a + b;
 }
-console.log(addition(9,10));
+console.log(addition(9, 10));
 
 // you can also use the arrow function syntax, as functions are the same as variables
 const additionArrow = (a: number, b: number): number => a + b;
 // the type of the function is (a: number, b: number) => number
-console.log(additionArrow(2,2));
+console.log(additionArrow(2, 2));
 
 // optionals are denoted with "?"
 function optional(a: number, b?: number): number {
-    if (b) { // if else example
-        return a + b;
-    } else {
-        return a;
-    }
+  if (b) {
+    // if else example
+    return a + b;
+  } else {
+    return a;
+  }
 }
 
 console.log(optional(25));
 
 // you can use "|" for multiple types (union)
-export function getId(id: string | number): number { // "export" allows a function to be callable by other files importing this one
-    if (typeof id === "string") { //this handles the string case
-        return parseInt(id);
-    }
-    return id;
+export function getId(id: string | number): number {
+  // "export" allows a function to be callable by other files importing this one
+  if (typeof id === "string") {
+    //this handles the string case
+    return parseInt(id);
+  }
+  return id;
 }
 
 console.log(`The ID is ${getId(123)} and has type ${typeof getId(123)}.`);
 
 // you can also do conditionals in line
 export function calculateApiCost(numReqs: number, membership?: string) {
-    if (!membership){
-        return numReqs*0.10;
-    }
-    return numReqs * (membership === "pro" ? 0.03 : 0.05); //if "pro" use first value, otherwise second value
+  if (!membership) {
+    return numReqs * 0.1;
+  }
+  return numReqs * (membership === "pro" ? 0.03 : 0.05); //if "pro" use first value, otherwise second value
 }
 
-console.log(`The API cost for 100 requests for non-members is ${calculateApiCost(100)}`);
-console.log(`The API cost for 100 requests for members is ${calculateApiCost(100,"member")}`);
-console.log(`The API cost for 100 requests for pro members is ${calculateApiCost(100,"pro")}`);
+console.log(
+  `The API cost for 100 requests for non-members is ${calculateApiCost(100)}`,
+);
+console.log(
+  `The API cost for 100 requests for members is ${calculateApiCost(100, "member")}`,
+);
+console.log(
+  `The API cost for 100 requests for pro members is ${calculateApiCost(100, "pro")}`,
+);
 
 //default parameters behave as expected
-export function calculateApiCostDefault(numReqs: number, membership: string = "free") {
-    return numReqs * (membership === "pro" ? 0.03 : 0.05);
+export function calculateApiCostDefault(
+  numReqs: number,
+  membership: string = "free",
+) {
+  return numReqs * (membership === "pro" ? 0.03 : 0.05);
 }
-console.log(`The default API cost for 100 requests is ${calculateApiCostDefault(100)}`);
+console.log(
+  `The default API cost for 100 requests is ${calculateApiCostDefault(100)}`,
+);
 
 // you can also use literal types instead of enums
 export function move(direction: "up" | "down" | "left" | "right") {
-    // some logic
-    console.log(`Moving ${direction}`);
+  // some logic
+  console.log(`Moving ${direction}`);
 }
 move("up");
 
 // or define your own type for reuse
 type Direction = "north" | "south" | "east" | "west";
 function moveTyped(direction: Direction) {
-    // logic
-    console.log(`Moving ${direction}`);
+  // logic
+  console.log(`Moving ${direction}`);
 }
 let characterMove: Direction = "north";
 moveTyped(characterMove);
@@ -95,9 +109,9 @@ let upWalk: WalkingDirection = "walk north";
 console.log(upWalk);
 
 console.log("\n");
-console.log('============');
-console.log('ARRAYS, TUPLES, LOOPS, HASHMAPS');
-console.log('============');
+console.log("============");
+console.log("ARRAYS, TUPLES, LOOPS, HASHMAPS");
+console.log("============");
 
 // An array that can only hold numbers
 let numbers: number[] = [10, 20, 30];
@@ -151,28 +165,28 @@ let userProfile: readonly [string, number, boolean] = ["Max", 28, true];
 // Destructuring the tuple
 const [userName, userAge, isMember] = userProfile;
 
-console.log(userName);  // Outputs: "Max"
-console.log(userAge);   // Outputs: 28
-console.log(isMember);  // Outputs: true
+console.log(userName); // Outputs: "Max"
+console.log(userAge); // Outputs: 28
+console.log(isMember); // Outputs: true
 
 // loops
 // for loop
 for (let i = 0; i < 5; i++) {
-    console.log(`Current count: ${i}`);
+  console.log(`Current count: ${i}`);
 }
 
 // while loop
 let loopCount = 0;
 while (loopCount < 3) {
-    console.log(`Count is ${loopCount}`);
-    loopCount++;
+  console.log(`Count is ${loopCount}`);
+  loopCount++;
 }
 
 // do while loop - runs at least once
 let doCount = 5;
 do {
-    console.log(`This runs at least once. Count: ${doCount}`);
-    doCount++;
+  console.log(`This runs at least once. Count: ${doCount}`);
+  doCount++;
 } while (doCount < 3);
 
 // iterating over an array
@@ -180,23 +194,23 @@ const fruitList: string[] = ["apple", "banana", "cherry"];
 
 // modern - just values
 for (const fruit of fruitList) {
-    console.log(fruit.toUpperCase());
-    // can use break or continue keywords
+  console.log(fruit.toUpperCase());
+  // can use break or continue keywords
 }
 
 // functional - with index
 fruitList.forEach((fruit, index) => {
-    console.log(`Item at index ${index} is ${fruit}`);
-    // cannot break the loop early
+  console.log(`Item at index ${index} is ${fruit}`);
+  // cannot break the loop early
 });
 
 // classic - c style
 for (let i = 0; i < fruitList.length; i++) {
-    console.log(`Item at index ${i} is ${fruitList[i]}`);
-    if (fruitList[i] === "banana") {
-        console.log("Found the banana!");
-        break; // we can stop the loop
-    }
+  console.log(`Item at index ${i} is ${fruitList[i]}`);
+  if (fruitList[i] === "banana") {
+    console.log("Found the banana!");
+    break; // we can stop the loop
+  }
 }
 
 // hashmaps
@@ -234,7 +248,7 @@ console.log(inventory.get("Apple")); // Output: 50
 console.log(inventory.get("Grapes")); // Output: undefined
 // check existence
 if (inventory.has("Banana")) {
-    console.log("We have bananas!");
+  console.log("We have bananas!");
 }
 // delete items
 inventory.delete("Apple");
@@ -245,16 +259,15 @@ for (const [fruit, count] of inventory) {
   console.log(`${fruit}: ${count}`);
 }
 
-
 console.log("\n");
-console.log('============');
-console.log('ENUMS, CLASSES, INTERSECTIONS, INTERFACES');
-console.log('============');
+console.log("============");
+console.log("ENUMS, CLASSES, INTERSECTIONS, INTERFACES");
+console.log("============");
 
 // @ts-ignore unused enum values
 enum Mode {
-    online,
-    offline
+  online,
+  offline,
 }
 
 let gameMode: Mode = Mode.offline;
@@ -264,28 +277,30 @@ console.log(`Game mode name: ${Mode[gameMode]}`); // Outputs: offline
 // Enum with custom numeric values
 // @ts-ignore unused enum values
 enum HttpStatus {
-    OK = 200,
-    Created = 201,
-    BadRequest = 400,
-    Unauthorized = 401,
-    NotFound = 404,
-    InternalServerError = 500
+  OK = 200,
+  Created = 201,
+  BadRequest = 400,
+  Unauthorized = 401,
+  NotFound = 404,
+  InternalServerError = 500,
 }
 
 function handleResponse(status: HttpStatus) {
-    switch (status) { // switch statement example
-        case HttpStatus.OK:
-            console.log("Request successful!");
-            break;
-        case HttpStatus.NotFound:
-            console.log("Resource not found.");
-            break;
-        case HttpStatus.InternalServerError:
-            console.log("Server error occurred.");
-            break;
-        default:
-            console.log(`Status code: ${status}`);
-    }
+  switch (
+    status // switch statement example
+  ) {
+    case HttpStatus.OK:
+      console.log("Request successful!");
+      break;
+    case HttpStatus.NotFound:
+      console.log("Resource not found.");
+      break;
+    case HttpStatus.InternalServerError:
+      console.log("Server error occurred.");
+      break;
+    default:
+      console.log(`Status code: ${status}`);
+  }
 }
 
 handleResponse(HttpStatus.OK);
@@ -295,9 +310,9 @@ handleResponse(401);
 // Const enum - more performant, inlined at compile time
 // @ts-ignore unused enum values
 const enum Color {
-    Red = "#FF0000",
-    Green = "#00FF00",
-    Blue = "#0000FF"
+  Red = "#FF0000",
+  Green = "#00FF00",
+  Blue = "#0000FF",
 }
 
 let backgroundColor = Color.Blue;
@@ -306,26 +321,25 @@ console.log(`Background color: ${backgroundColor}`);
 
 // Using enums in functions with reverse mapping (numeric enums only)
 function getStatusName(code: number): string | undefined {
-    return HttpStatus[code];
+  return HttpStatus[code];
 }
 
 console.log(`Status 200 is: ${getStatusName(200)}`); // Outputs: OK
 console.log(`Status 404 is: ${getStatusName(404)}`); // Outputs: NotFound
 
-
 // Class - a blueprint for creating objects with properties AND methods
 class Person {
-    name: string;
-    age: number;
+  name: string;
+  age: number;
 
-    constructor(name: string, age: number) {
-        this.name = name;
-        this.age = age;
-    }
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
 
-    greet(): string {
-        return `Hello, I'm ${this.name} and I'm ${this.age} years old.`;
-    }
+  greet(): string {
+    return `Hello, I'm ${this.name} and I'm ${this.age} years old.`;
+  }
 }
 
 const person1 = new Person("Alice", 30); // syntax resembling C++ before C++11
@@ -334,59 +348,60 @@ console.log(person1.greet());
 // TypeScript also has inheritance, as annoying as the existence of it is
 
 class Warrior extends Person {
-    weapon: string;
+  weapon: string;
 
-    constructor(name: string, age: number, weapon: string) {
-        super(name,age);
-        this.weapon = weapon;
-    }
+  constructor(name: string, age: number, weapon: string) {
+    super(name, age);
+    this.weapon = weapon;
+  }
 
-    // Override parent method
-    greet(): string {
-        return `Hello, I'm ${this.name}, I'm ${this.age} years old, and I wield a ${this.weapon}.`;
-    }
+  // Override parent method
+  greet(): string {
+    return `Hello, I'm ${this.name}, I'm ${this.age} years old, and I wield a ${this.weapon}.`;
+  }
 
-    // Add a new method specific to Warrior
-    attack(): string {
-        return `${this.name} attacks with their ${this.weapon}!`;
-    }
+  // Add a new method specific to Warrior
+  attack(): string {
+    return `${this.name} attacks with their ${this.weapon}!`;
+  }
 }
 
 const warrior1 = new Warrior("Thor", 1500, "hammer");
 console.log(warrior1.greet()); // Uses overridden method
 console.log(warrior1.attack()); // Uses Warrior-specific method
 
-// Interface - defines the structure/shape of an object WITHOUT methods
-interface Product { // resembles C style structs
-    id: number;
-    name: string;
-    price: number;
+// Interface - defines the expected shape of an object, including properties and methods
+// often useful for describing values provided by the web environment, e.g. window.something
+interface Product {
+  id: number;
+  name: string;
+  price: number;
 }
 
 const laptop: Product = {
-    id: 1,
-    name: "MacBook Pro",
-    price: 1999
-};
+  id: 1,
+  name: "MacBook Pro",
+  price: 1999,
+}; //feels like a struct in other languages
 
 console.log(`Product: ${laptop.name}, Price: $${laptop.price}`);
 
 // Classes can also inherit (implement) interfaces
 interface Drivable {
-    speed: number;
-    drive(): void;
+  speed: number;
+  drive(): void;
 }
 
 class Car implements Drivable {
-    speed: number;
+  speed: number;
 
-    constructor(speed: number) {
-        this.speed = speed;
-    }
+  constructor(speed: number) {
+    this.speed = speed;
+  }
 
-    drive(): void {
-        console.log(`Driving at ${this.speed} km/h`);
-    }
+  drive(): void {
+    console.log(`Driving at ${this.speed} km/h`);
+  }
 }
 
 const myCar = new Car(120);
@@ -394,29 +409,31 @@ myCar.drive();
 
 // Intersection - combines multiple types into one (must have ALL properties)
 type HasName = {
-    name: string;
+  name: string;
 };
 
 type HasEmail = {
-    email: string;
+  email: string;
 };
 
 type User = HasName & HasEmail; // Intersection: must have both name AND email
 
 const user1: User = {
-    name: "Bob",
-    email: "bob@example.com"
+  name: "Bob",
+  email: "bob@example.com",
 };
 
 console.log(`User: ${user1.name}, Email: ${user1.email}`);
 
 console.log("\n");
-console.log('============');
-console.log('GENERICS, CASTING, NULL, ASYNC, SPREAD');
-console.log('============');
+console.log("============");
+console.log("GENERICS, CASTING, NULL, ASYNC, SPREAD");
+console.log("============");
 
 // Generics - reusable function for many types, without specifying unions
-function identity<T>(arg: T): T { return arg; } // think C++ templates
+function identity<T>(arg: T): T {
+  return arg;
+} // think C++ templates
 
 console.log(identity(2));
 console.log(identity("cat"));
@@ -428,15 +445,15 @@ console.log(strLength);
 
 // Async
 async function fetchData(): Promise<string> {
-    return "data";
+  return "data";
 }
 
 console.log(`Data received: ${fetchData()}`);
 
 // Spread operator - merge arrays and objects
-let arr1 = [1,2,3]
-let arr2 = [...arr1,4,5]
-console.log(arr2)
+let arr1 = [1, 2, 3];
+let arr2 = [...arr1, 4, 5];
+console.log(arr2);
 
 // Null handling
 
@@ -448,19 +465,19 @@ console.log(`undefined: ${notAssigned}, null: ${empty}`);
 
 // Optional chaining (?.) - safely access nested properties
 type Address = {
-    street: string;
-    city: string;
+  street: string;
+  city: string;
 };
 
 type Customer = {
-    name: string;
-    address?: Address; // address is optional
+  name: string;
+  address?: Address; // address is optional
 };
 
 const customer1: Customer = { name: "John" };
 const customer2: Customer = {
-    name: "Jane",
-    address: { street: "123 Main St", city: "Boston" }
+  name: "Jane",
+  address: { street: "123 Main St", city: "Boston" },
 };
 
 // Without optional chaining (would cause error if the address is undefined)
@@ -495,12 +512,12 @@ console.log(maybeString!.toUpperCase()); // HELLO
 // If maybeString was actually undefined, this would crash at runtime!
 
 console.log("\n");
-console.log('============');
-console.log('IMPORTS/EXPORTS');
-console.log('============');
+console.log("============");
+console.log("IMPORTS/EXPORTS");
+console.log("============");
 
 // You can import any functions or classes that have the export keyword
-import { importedAddition } from './functions';
+import { importedAddition } from "./functions";
 
 // You can also import multiple things at once:
 // import { function1, function2, MyClass } from './functions';
