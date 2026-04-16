@@ -4,9 +4,7 @@ Basic repo with core TypeScript syntax.
 
 ## Running the code
 
-The repo was generated using WebStorm (JetBrains IDE) with their TS preset.
-
-To get this running, first use NPM to install the dependencies:
+To get this running, first use `bun` or `npm` to install the dependencies:
 ```bash
 bun install
 ```
@@ -25,3 +23,5 @@ or directly:
 ```bash
 node-ts src/index.ts
 ```
+
+look into `package.json` for how functions are defined.
